@@ -26,7 +26,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
           - secretRef:
-            name: helm-guestbook-secret
+              name: helm-guestbook-secret
           ports:
             - name: http
               containerPort: 80
