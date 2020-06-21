@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "helm-guestbook.fullname" . }}
+  name: {{ .Values.config.name }}
   labels:
-    app: {{ template "helm-guestbook.name" . }}
+    app: {{ .Values.config.name }}
     chart: {{ template "helm-guestbook.chart" . }}
-    release: {{ .Release.Name }}
+    release: {{ .Values.config.name }}
     heritage: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: {{ template "helm-guestbook.name" . }}
-      release: {{ .Release.Name }}
+      app: {{ .Values.config.name }}
+      release: {{ .Values.config.name }}
   template:
     metadata:
       labels:
-        app: {{ template "helm-guestbook.name" . }}
-        release: {{ .Release.Name }}
+        app: {{ .Values.config.name }}
+        release: {{ .Values.config.name }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ .Values.config.name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
